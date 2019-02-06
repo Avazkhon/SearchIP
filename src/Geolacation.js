@@ -54,19 +54,23 @@ class Geolacation extends React.Component{
 
 	render () {
 		return (
-			<div>
-				<div>{this.state.city}</div>
-				<div>{this.state.city_rus}</div>
-				<div>{this.state.country}</div>
-				<div>{this.state.country_code}</div>
-				<div>{this.state.country_rus}</div>
-				<div>{this.state.ip}</div>
-				<div>{this.state.latitude}</div>
-				<div>{this.state.longitude}</div>
-				<div>{this.state.region}</div>
-				<div>{this.state.region_rus}</div>
-				<div>{this.state.time_zone}</div>
-				<input type="button" onClick={this.handleClick} value="get"  />
+			<div className="geolacation" >
+				<div>
+					<input type="button" onClick={this.handleClick} value="get"  />
+				</div>
+				<div>
+					<div>{this.state.city}</div>
+					<div>{this.state.city_rus}</div>
+					<div>{this.state.country}</div>
+					<div>{this.state.country_code}</div>
+					<div>{this.state.country_rus}</div>
+					<div>{this.state.ip}</div>
+					<div>{this.state.latitude}</div>
+					<div>{this.state.longitude}</div>
+					<div>{this.state.region}</div>
+					<div>{this.state.region_rus}</div>
+					<div>{this.state.time_zone}</div>
+				</div>
 			</div>
 		)
 	}

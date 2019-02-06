@@ -1,0 +1,28 @@
+#app {
+	width: 100%;
+	height: 100%;
+	border: 1px solid;
+}
+.conteiner {
+	width: 840px;
+	height: 840px;
+}
+
+.head{
+	width: 100%;
+	height: 100px;
+	border: 1px solid;
+}
+
+.geolacation{
+	margin: 0 auto;
+	width: 840px;
+	height: 720px;
+	border: 1px solid;
+}
+
+.footer{
+	width: 100%;
+	height: 100px;
+	border: 1px solid;
+}
