@@ -2,11 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Head from './Head';
-import Geolacation from './Geolacation'
+import Geolacation from './Geolacation';
 import Footer from './Footer';
-
-
-const title = 'Update My Minimal React Webpack Babel Setup';
 
 class Conteiner extends React.Component {
 	render() {
@@ -19,8 +16,6 @@ class Conteiner extends React.Component {
 		)
 	}
 }
-
-
 
 ReactDOM.render(
   <Conteiner />,
