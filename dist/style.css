@@ -28,7 +28,7 @@
 .tools{
 	width: 100%;
 	height: 150px;
-	background-color: #F2F5E0;
+	background-color: #dbe4a3;
 	border-radius: 20px;
 }
 
@@ -47,4 +47,24 @@
 	margin-top: 50px;
 	margin-right: 15px; 
 	float: right;
+}
+
+.currentRequest{
+	margin-top: 20px;
+}
+
+.currentRequestInner{
+	background-color: #b4e4b6;
+	border-radius: 20px;
+	padding: 15px;
+}
+
+.story{
+	margin-top: 20px; 
+}
+.storyInner{
+	margin: 10px;
+	background-color: #12313245;
+	border-radius: 20px;
+	padding: 15px;
 }

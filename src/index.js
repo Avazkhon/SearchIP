@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import Head from './Head';
 import Geolacation from './Geolacation';
-import Footer from './Footer';
 
 class Conteiner extends React.Component {
 	render() {
@@ -11,7 +10,6 @@ class Conteiner extends React.Component {
 			<div className="Conteiner">
 				<Head />
 				<Geolacation />
-				<Footer />
 			</div>
 		)
 	}
