@@ -18,10 +18,14 @@ class Geolacation extends React.Component{
 				region_rus: null,
 				time_zone:	null
 			},
-			value: ""
+			value: "",
+			oldRequests: false
+
 		}
 		this.handleClick = this.handleClick.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleStorge = this.handleStorge.bind(this);
+		this.handleOldRequests = this.handleOldRequests.bind(this);
 	}
 
 
@@ -33,6 +37,7 @@ class Geolacation extends React.Component{
 		xhr.onreadystatechange = ()=>{
 			if(xhr.readyState === XMLHttpRequest.DONE) {
 				let obj = JSON.parse(xhr.response)
+				obj.date = new Date();
 				innerObj.push(obj)
 	           this.setState(() => ({
 	           	  object: {
@@ -65,7 +70,6 @@ class Geolacation extends React.Component{
 				<div>IP: {obj.ip}</div>
 				<div>ширина: {obj.latitude}</div>
 				<div>долгота: {obj.longitude}</div>
-				<div>регион: {obj.region}</div>
 				<div>ч. пояс: {obj.time_zone}</div>
 			</div>
 		)
@@ -74,26 +78,38 @@ class Geolacation extends React.Component{
   	handleChange(event) {
 
    		this.setState({value: event.target.value});
-   		console.log(this.state.value)
+
+  	}
+
+  	handleOldRequests() {
+  		this.setState(()=>({
+  			oldRequests: !this.state.oldRequests
+  		}))
+  		console.log("handleOldRequests",this.state.oldRequests)
   	}
 
   	handleStorge () {
   		let obj = JSON.parse(localStorage.getItem('localObj'));
-  		let getObj = obj.map((item)=>{
+
+  		if(obj!== null && !this.state.oldRequests) {
+
+  			let getObj = obj.map((item)=>{
 		  		return(
-					<div className="storyInner" key={Math.random()}>
+					<div className="storyInner" key={item.date}>
+						<div>дата: {item.date}</div>
 						<div>город: {item.city}</div>
-						<div>страна {item.country}</div>
+						<div>страна: {item.country}</div>
 						<div>аббревиатура: {item.country_code}</div>
 						<div>IP: {item.ip}</div>
 						<div>ширина: {item.latitude}</div>
 						<div>долгота: {item.longitude}</div>
-						<div>регион: {item.region}</div>
 						<div>ч. пояс: {item.time_zone}</div>
 					</div>
 		  		)
 	  		})
-  		return getObj;
+  			return getObj;
+  		}
+  		return null
   	}
 
 	render () {
@@ -102,10 +118,11 @@ class Geolacation extends React.Component{
 				<div className="tools" >
 					<div className="button">
 						<input type="button" className="btn" onClick={this.handleClick} value="узнать свой адрес"  />
+						<input type="button" className="btn"  value="скрить старые запросы" onClick={this.handleOldRequests}/>
 					</div>
 					<div className="searche" >
 						<input type="number" className="btn" name="urlIP" placeholder="введите IP" value={this.state.value} onChange={this.handleChange} />
-						<input type="button" className="btn" value="найти" onClick={this.handleClick} />
+						<input type="button" className="btn" value="найти" onClick={this.handleClick } />
 					</div>
 				</div>
 				<div className="currentRequest">
