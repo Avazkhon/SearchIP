@@ -76,8 +76,11 @@ class Geolacation extends React.Component{
 	}
 	
   	handleChange(event) {
-
-   		this.setState({value: event.target.value});
+  		let inputValue = localStorage.getItem('inputValue')
+  		console.log(inputValue)
+  		this.setState({ value: inputValue })
+  		localStorage.setItem("inputValue", this.state.value);
+ 		this.setState({value: event.target.value});
 
   	}
 
