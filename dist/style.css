@@ -1,7 +1,6 @@
 #app {
 	width: 100%;
 	height: 100%;
-	border: 1px solid;
 }
 .conteiner {
 	width: 840px;
@@ -18,7 +17,6 @@
 	margin: 0 auto;
 	width: 840px;
 	height: 720px;
-	/*border: 1px solid;*/
 }
 
 .footer{
