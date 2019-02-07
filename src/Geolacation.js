@@ -1,6 +1,7 @@
 import React from 'react';
 
 let innerObj = [];
+
 class Geolacation extends React.Component{
 	constructor(props) {
 		super(props)
@@ -18,7 +19,7 @@ class Geolacation extends React.Component{
 				region_rus: null,
 				time_zone:	null
 			},
-			value: "",
+			value: localStorage.getItem('inputValue'),
 			oldRequests: false
 
 		}
@@ -52,7 +53,8 @@ class Geolacation extends React.Component{
 					  region: obj.region,
 					  region_rus: obj.region_rus,
 					  time_zone: obj.time_zone
-				 }
+				 },
+				value: ""
 
 			    }));
 	           localStorage.setItem("localObj", JSON.stringify(innerObj)) 
@@ -77,11 +79,9 @@ class Geolacation extends React.Component{
 	
   	handleChange(event) {
   		let inputValue = localStorage.getItem('inputValue')
-  		console.log(inputValue)
-  		this.setState({ value: inputValue })
-  		localStorage.setItem("inputValue", this.state.value);
- 		this.setState({value: event.target.value});
-
+  		// this.setState({ value: localStorage.getItem('inputValue') })
+  		localStorage.setItem("inputValue", `${event.target.value}`);
+ 		this.setState({value:`${event.target.value}`});
   	}
 
   	handleOldRequests() {
@@ -116,20 +116,21 @@ class Geolacation extends React.Component{
   	}
 
 	render () {
+
 		return (
 			<div className="geolacation" >
 				<div className="tools" >
 					<div className="button">
 						<input type="button" className="btn" onClick={this.handleClick} value="узнать свой адрес"  />
-						<input type="button" className="btn"  value="скрить старые запросы" onClick={this.handleOldRequests}/>
+						<input type="button" className="btn"  value="скрить старые запросы" onClick={this.handleOldRequests} />
 					</div>
 					<div className="searche" >
-						<input type="number" className="btn" name="urlIP" placeholder="введите IP" value={this.state.value} onChange={this.handleChange} />
+						<input type="text" className="btn" name="urlIP" placeholder="введите IP" value={this.state.value} onChange={this.handleChange} />
 						<input type="button" className="btn" value="найти" onClick={this.handleClick } />
 					</div>
 				</div>
 				<div className="currentRequest">
-					{ this.currentRequest(this.state.object) }
+					{ this.currentRequest(this.state.object)  }
 				</div>
 				<div className="story">
 					{ this.handleStorge() }
