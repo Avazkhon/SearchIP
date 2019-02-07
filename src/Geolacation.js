@@ -19,28 +19,40 @@ class Geolacation extends React.Component{
 				region_rus: null,
 				time_zone:	null
 			},
-			value: localStorage.getItem('inputValue'),
-			oldRequests: false
+			value: localStorage.getItem('inputValue') | "",
+			oldRequests: false,
+			info: ""
 
 		}
 		this.handleClick = this.handleClick.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleStorge = this.handleStorge.bind(this);
 		this.handleOldRequests = this.handleOldRequests.bind(this);
+		this.handleIp = this.handleIp.bind(this);
+		this.handleMyIp = this.handleMyIp.bind(this);
 	}
 
+	handleMyIp() {
+		this.handleClick("")
+	}
 
-	handleClick () {
-		const url = "https://api.2ip.ua/geo.json?ip="+this.state.value;
+	handleIp() {
+		this.handleClick(this.state.value)
+	}
+
+	handleClick (ip) {
+		const url = "https://api.2ip.ua/geo.json?ip="+ip;
 		const xhr = new XMLHttpRequest();
 		xhr.open("GET",  url, true)
 
 		xhr.onreadystatechange = ()=>{
-			if(xhr.readyState === XMLHttpRequest.DONE) {
+			if(xhr.readyState === XMLHttpRequest.DONE) { 
+
 				let obj = JSON.parse(xhr.response)
 				obj.date = new Date();
 				innerObj.push(obj)
-	           this.setState(() => ({
+
+	           	this.setState(() => ({
 	           	  object: {
 				      city: obj.city,
 					  city_rus: obj.city_rus,
@@ -79,7 +91,6 @@ class Geolacation extends React.Component{
 	
   	handleChange(event) {
   		let inputValue = localStorage.getItem('inputValue')
-  		// this.setState({ value: localStorage.getItem('inputValue') })
   		localStorage.setItem("inputValue", `${event.target.value}`);
  		this.setState({value:`${event.target.value}`});
   	}
@@ -121,12 +132,13 @@ class Geolacation extends React.Component{
 			<div className="geolacation" >
 				<div className="tools" >
 					<div className="button">
-						<input type="button" className="btn" onClick={this.handleClick} value="узнать свой адрес"  />
+						<input type="button" className="btn" onClick={this.handleMyIp} value="узнать свой адрес"  />
 						<input type="button" className="btn"  value="скрить старые запросы" onClick={this.handleOldRequests} />
 					</div>
+					<div  className="info" >{this.state.info}</div>
 					<div className="searche" >
 						<input type="text" className="btn" name="urlIP" placeholder="введите IP" value={this.state.value} onChange={this.handleChange} />
-						<input type="button" className="btn" value="найти" onClick={this.handleClick } />
+						<input type="button" className="btn" value="найти" onClick={this.handleIp } />
 					</div>
 				</div>
 				<div className="currentRequest">
